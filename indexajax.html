@@ -41,6 +41,7 @@
     var editor=null;	
     var editorstring="";
     var search = location.search.substr(1);
+    var imageMap = null;
     if (search)  {
       var params = search.split('&');
       for (var i=0; i<params.length; i++) {
@@ -560,7 +561,7 @@ function loadTCDocIdText(pageid, pagekey) {
 									minZoom: 1,\
 									maxZoom: 5 \
 							};\
-							var imageMap = new ImageMap($imageMap[0], "http://textualcommunities.usask.ca/api/docs/'+pageid+'/has_image/", options);';
+							imageMap = new ImageMap($imageMap[0], "http://textualcommunities.usask.ca/api/docs/'+pageid+'/has_image/", options);';
 		$('#docimage').html(imagecall);
 		imageLoaded=1;
 	}
@@ -904,8 +905,6 @@ function splitvertical () {
 		$( "#lowerright" ).css("top", '-54px');
 		$( "#transcript").css("position", "relative");
 		$( "#transcript").css("top", "12px");
-		google.maps.event.trigger(imageMap, 'resize');
-//		imageMap.setZoom(imageMap.getZoom());
 	//		$('#image').width($("#topright").width()-8);
 		if (editor) editor.setSize($("#transcripttext").parent().parent().width(), $("#transcripttext").parent().parent().height()-49);
 		else {
@@ -1002,6 +1001,9 @@ function splitvertical () {
 			$( "#lowerright" ).css( "minHeight",'200px');
 		});
 	}
+        var map = imageMap.map;
+        google.maps.event.trigger(map, 'resize');
+        map.setZoom(map.getZoom());
 }
 
 function showTOC(){
