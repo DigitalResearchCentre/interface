@@ -40,6 +40,18 @@
     var community="CT2";   
     var editor=null;	
     var editorstring="";
+    var search = location.search.substr(1);
+    if (search)  {
+      var params = search.split('&');
+      for (var i=0; i<params.length; i++) {
+        var param = params.split('=');
+        var key = param[0];
+        var value = param[1];
+        if (key == 'community') {
+          community = value;
+        }
+      }
+    }
     
     function loadTexts (mycommunity) {
 		$.getJSON(url+'communities/?page_size=0&format=json',  function (data) { 
