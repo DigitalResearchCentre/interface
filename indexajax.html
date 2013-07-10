@@ -44,7 +44,7 @@
     if (search)  {
       var params = search.split('&');
       for (var i=0; i<params.length; i++) {
-        var param = params.split('=');
+        var param = params[i].split('=');
         var key = param[0];
         var value = param[1];
         if (key == 'community') {
