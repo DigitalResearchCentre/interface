@@ -576,7 +576,7 @@ function loadTCDocIdText(pageid, pagekey) {
 					if (versions.length==1) {
 						$.getJSON(url+'docs/'+pageid+'/cur_revision/?page_size=0&format=json',function(thetext){
 							$.getJSON(url+'users/'+thetext.user+'/?page_size=0&format=json',function(user) {
-								$('#transcriptinf').html('Only one edited version ('+thetext.edit_date+', '+user.first_name+' '+user.last_name+').  <a href="javascript:compareToDb('+pageid+', '+thetext.id+')">Compare to database.</a>');
+								$('#transcriptinf').html('Only one edited version ('+thetext.create_date+', '+user.first_name+' '+user.last_name+').  <a href="javascript:compareToDb('+pageid+', '+thetext.id+')">Compare to database.</a>');
 								loadTCDocumentText(thetext.text, pagekey);
 								createTranscriptMenus(pageid, thetext.id, -1).done(function (menus) {
 									$('#revinf1').html(menus.left);
@@ -678,11 +678,11 @@ function createTranscriptMenus (pageid, left, right) {
 				var userInf=getUserInf(versions[i].user);
 				if (versions[i].id!=right) {
 					if (versions[i].id==left) {
-						var d = Date.parse(versions[i].edit_date);
-						var x= moment(versions[i].edit_date).format('LLL');
-						leftMenu+='<option value="'+versions[i].id+'" selected="selected">'+moment(versions[i].edit_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
+						var d = Date.parse(versions[i].create_date);
+						var x= moment(versions[i].create_date).format('LLL');
+						leftMenu+='<option value="'+versions[i].id+'" selected="selected">'+moment(versions[i].create_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
 					}
-					else leftMenu+='<option value="'+versions[i].id+'">'+moment(versions[i].edit_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
+					else leftMenu+='<option value="'+versions[i].id+'">'+moment(versions[i].create_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
 				}
 			}
 			//append database version
@@ -700,8 +700,8 @@ function createTranscriptMenus (pageid, left, right) {
 				var userInf=getUserInf(versions[i].user);
 				if (versions[i].id!=left) {
 					if (versions[i].id==right) 
-						rightMenu+='<option value="'+versions[i].id+'" selected="selected">'+moment(versions[i].edit_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
-					else rightMenu+='<option value="'+versions[i].id+'">'+moment(versions[i].edit_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
+						rightMenu+='<option value="'+versions[i].id+'" selected="selected">'+moment(versions[i].create_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
+					else rightMenu+='<option value="'+versions[i].id+'">'+moment(versions[i].create_date).format('MMMM Do YYYY, h:mm:ss a')+': '+userInf.first_name+' '+userInf.last_name+'</option>';
 				}
 			}
 			if (left!=0) {
