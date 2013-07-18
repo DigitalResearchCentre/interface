@@ -735,9 +735,11 @@ function createTranscriptMenus (pageid, left, right) {
 function SaveTranscript() {
 	if (editor) {
 		var pageid=$('#tcntSave').attr('value');
-		$.post('http://textualcommunities.usask.ca/api/transcribe/', {
+
+                // hard code user 6 for now
+		$.post('http://textualcommunities.usask.ca/api/docs/'+pageid+'transcribe/', {
 				text: editor.getValue(),
-				doc: pageid
+				user: 6
 			}).success(function(){
 				//redo the transcript menus here
 				alert('success');
