@@ -737,7 +737,7 @@ function SaveTranscript() {
 		var pageid=$('#tcntSave').attr('value');
 
                 // hard code user 6 for now
-		$.post('http://textualcommunities.usask.ca/api/docs/'+pageid+'transcribe/', {
+		$.post('http://textualcommunities.usask.ca/api/docs/'+pageid+'/transcribe/', {
 				text: editor.getValue(),
 				user: 6
 			}).success(function(){
